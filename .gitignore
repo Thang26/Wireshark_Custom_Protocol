@@ -1,2 +1,17 @@
-# Ignore compiled files
-*.o
+# Ignore all contents of the Debug folder
+Debug/
+
+# Ignore all contents of the .vscode folder
+.vscode/
+
+# Ignore .launch files
+*.launch
+
+# Ignore .cproject files
+.cproject
+
+# Ignore .project files
+.project
+
+# Ignore all contents of the .settings folder
+.settings/

@@ -17,13 +17,31 @@
  */
 
 #include <stdint.h>
+#include <functional>
+#include "uart_engine.hpp"
+#include "timer_engine.hpp"
+#include "led_engine.hpp"
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+UART_ENGINE uart3;
+TIMER_ENGINE timer6;
+
 int main(void)
 {
-    /* Loop forever */
-	for(;;);
+  LED_Init();
+
+  uart3.initialize();
+
+  auto timer_action = [&]()
+  {
+      uart3.transmit("Hello from a proper C++ class!\r\n");
+  };
+
+  timer6.initialize(64000 - 1, 1000 - 1, timer_action);
+  timer6.start();
+
+  while(1){}
 }
